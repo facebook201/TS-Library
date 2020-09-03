@@ -21,7 +21,6 @@ function useInterval(callback: (time: number) => void, interval: number) {
 function useSlider(N: number, speed = 3000) {
   const [slider, setSlider] = useState(0);
   useInterval(diff => {
-    console.log((diff / speed) % N);
     setSlider((_: any) => Math.floor(diff / speed) % N);
   }, 300);
   return slider;

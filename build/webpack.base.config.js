@@ -32,6 +32,11 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: ['awesome-typescript-loader']
+      },
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
       }
     ]
   },

@@ -4,7 +4,8 @@
   "description": "typescript库",
   "main": "./src/index.ts",
   "scripts": {
-    "start": "webpack-dev-server --mode=development --config ./build/webpack.config.js"
+    "start": "webpack-dev-server --mode=development --config ./build/webpack.config.js",
+    "dev": "nodemon ./demo.js -i ./src/promise/"
   },
   "author": "shiyao",
   "license": "ISC",
@@ -17,5 +18,8 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.4"
   }
 }

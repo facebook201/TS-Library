@@ -28,3 +28,5 @@ function clientCode() {
     console.log('Singleton works');
   }
 }
+
+export const Version = '1.0.1';

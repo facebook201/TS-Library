@@ -24,3 +24,7 @@ let fn = doSth(4, logSth.bind(null, logSth2));
 fn();
 
 
+
+
+
+

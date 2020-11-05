@@ -52,7 +52,7 @@ function rotate(nums, k, way = 1) {
 const array2 = [1, 0, 3, 0, 6, 21, 0, 98];
 
 function moveZero(nums) {
-  // 双指针引用 j 记录0的个数
+  // 双指针引用 j记录0的个数 最后j的索引到到最末尾差值就是 0 的个数 然后补0即可
   let j = 0;
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] !== 0) {
@@ -61,8 +61,71 @@ function moveZero(nums) {
     }
   }
   nums.fill(0, j, nums.length);
-  console.log(nums)
+  // console.log(nums)
 }
 
 moveZero(array2);
+
+
+/**
+ * 存在重复的元素
+ * 给定一个整数数组，判断是否存在重复元素。如果任何值在数组中出现至少两次，
+ * 函数返回 true。如果数组中每个元素都不相同，则返回false。
+ * [1, 2, 3, 1] true [1, 2, 3, 4] false
+ */
+
+
+/**
+ * @param {number []} nums
+ * 方法一 排序之后遍历 相邻元素相等就表示重复
+ * 二 set之后 重复元素会去掉 比较长度
+ */
+function duplicateElement(nums, way = 1) {
+  let newNums = [];
+  if (way == 1) {
+    newNums = nums.sort((a, b) => a - b > 0);
+    for (let i = 1; i < newNums.length; i++) {
+      if (newNums[i] === newNums[i - 1]) {
+        return false
+      }
+    }
+  } else {
+    newNums = [...new Set(nums)];
+    console.log(newNums);
+    return newNums.length === nums.length;
+  }
+  return true;
+}
+
+duplicateElement([1, 2, 3, 4, 1, 2, 3], 1);
+
+/**
+ * 无重复字符的最长子串
+ * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+ * "abcabcbb" 输出 3 ===> abc
+ * “bbbbb” 输出1 ===> b
+ *
+ * 
+ * 1、用一个字符串来存储字符 
+ * 2、如果有重复的就先加到后面 
+ * 3、然后截取第一个重复的字符 
+ * 4、遍历结束 最后的string 就是不重复的子串
+ */
+
+const str = 'abcabccbscdefg'; // 7 ====> bscdegf
+
+function longestStr(str) {
+  let string = '';
+  for (const s of str) {
+    if (string.indexOf(s) === -1) {
+      string += s;
+    } else {
+      string += s;
+      string = string.slice(string.indexOf(s) + 1);
+    }
+  }
+  return string.length;
+}
+
+longestStr(str);
 

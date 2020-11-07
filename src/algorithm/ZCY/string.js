@@ -116,11 +116,14 @@ function longestCommonPrefix(arr) {
         break;    
       }
     }
+    // 截取公共相同的字符子集
     common = common.slice(0, j);
     i++;
   }
   return common;
 }
+
+
 
 
 

@@ -2,7 +2,6 @@
  * 链表的类 Node表示节点 LinkedList 提供节点操作
  */
 
-
 class Node {
   constructor(el) {
     this.el = el;

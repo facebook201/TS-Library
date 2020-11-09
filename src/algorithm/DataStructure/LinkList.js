@@ -17,7 +17,6 @@ class LinkedList {
   // 查找节点
   find(element) {
     let currentNode = this.head;
-
     while (currentNode.el !== element) {
       currentNode = currentNode.next;
     }
@@ -28,7 +27,6 @@ class LinkedList {
   insert(element, item) {
     let node = new Node(item);
     let currentNode = this.head;
-
     while (currentNode.el != element) {
       currentNode = currentNode.next;
     }
@@ -42,9 +40,7 @@ class LinkedList {
   remove(element) {
     let currentNode = this.head;
     let previous;
-
     if (currentNode.next == null) return false;
-
     while (currentNode.el !== element) {
       // 保存上一个节点 后面找到元素之后把他的next指针指向下一个即可
       previous = currentNode;
@@ -67,12 +63,45 @@ class LinkedList {
 }
 
 const list = new LinkedList();
+const list1 = new LinkedList();
 
 list.append('A');
 list.append('B');
 list.append('C');
 list.append('D');
-console.log(list);
-list.insert('C', 'F');
-list.remove('F');
+
+
+list1.append('A');
+list1.append('C');
+list1.append('D');
+list1.append('F');
+list1.append('G');
+list1.append('H');
+
+
+function mergeTwoLists(head1, head2) {
+  let newNode = new LinkedList().head;
+  let prevNode = newNode;
+
+  head1 = head1.next;
+  head2 = head2.next;
+
+  while (head1 !== null && head2 !== null) {
+    if (head1.el <= head2.el) {
+      prevNode.next = head1;
+      head1 = head1.next;
+    } else {
+      prevNode.next = head2;
+      head2 = head2.next;
+    }
+    prevNode = prevNode.next;
+  }
+
+  prevNode.next = head1 || head2;
+  return newNode.next;
+}
+
+mergeTwoLists(list.head, list1.head);
+
+
 

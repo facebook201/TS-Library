@@ -1,113 +1,156 @@
-
-
-
-
-
-
 /**
- * 前缀树 (Trie)
+ * 快速学习一个非常重要的策略就是，对繁杂的知识，进行统一划归，并进一步简化，去伪存真。
+ * 任何一种知识，只要你能抓最主要的矛盾，掌握最核心的概念，你就能快速学习。
+ * 这也是在硅谷大热的“第一性原理”
  * 
- * 专门处理字符串匹配的数据结构，用来解决在一组字符串集合中快速查找某个字符串的问题
- * Trie 树也称前缀树（因为某节点的后代存在共同的前缀，比如pan是panda的前缀）。
- * 它的key都为字符串，能做到高效查询和插入，时间复杂度为O(k)，
- * k为字符串长度，缺点是如果大量字符串没有共同前缀时很耗内存
+ * 二叉树
+ *   二叉查找树
+ *   平衡二叉树
+ *   AVL树
+ *   红黑树
+ *   完全二叉树   
  * 
- * 核心思想就是通过最大限度地减少无谓的字符串比较，使得查询高效率，
- * 即「用空间换时间」，再利用共同前缀来提高查询效率。
+ * 
+ * 多路查找树
+ *   B树
+ *   B+树
+ *   2-3树
+ *   2-3-4树
+ * 
+ * 
+ * 堆
+ *   小顶堆
+ *   大顶堆
+ *   二项堆
+ *   优先队列
  */
+
 
 class Node {
-  constructor(str) {
-    // 每个字符经过节点的次数
-    this.path = 0;
-    this.children = Object.create(null);
-    this.endCount = 0;
+  constructor(value = null) {
+    this.value = value;
+    this.right = null;
+    this.left = null;
   }
 }
 
-class TrieNode {
+class BST {
   constructor() {
-    this.root = new Node('root');
+    this.root = null;
+    this.size = 0;
   }
 
-  insert(str) {
-    let cur = this.root;
-    for (const c of str) {
-      if (!cur.children[c]) {
-        cur.children[c] = new Node(c);
+  // 添加树节点
+  append(val) {
+    // this.root = this.addChild(this.root, val);
+  }
+
+  // 迭代写法
+  insert(val) {
+    const node = new Node(val);
+    if (this.root === null) { 
+      this.root = node;
+    } else {
+      let currentNode = this.root;
+      let parent = null;
+
+      // 迭代的写法
+      while (true) {
+        parent = currentNode;
+        if (val < parent.value) {
+          currentNode = currentNode.left
+          if (currentNode === null) {
+            parent.left = node;
+            break;
+          }
+        } else {
+          currentNode = currentNode.right;
+          if (currentNode === null) {
+            parent.right = node;
+            break;
+          }
+        }
       }
-      cur.path += 1;
-      cur = cur.children[c];
     }
-    cur.endCount++;
-    cur.isWord = true;
+    this.size++;
   }
 
-  traverse(str) {
-    let cur = this.root;
-
-    for (const c of str) {
-      if (!cur.children[c]) return false;
-      let node = cur.children[c];
-      cur = node;
+  // 递归的写法
+  addChild(root, val) {
+    // 节点为空
+    if (root === null) {
+      this.size++;
+      return new Node(val);
     }
-    return cur;
+    if (root.value > val) {
+      root.left = this.addChild(root.left, val);
+    } else if (root.value < val) {
+      root.right = this.addChild(root.right, val);
+    }
+    return root;
   }
 
-  search(str) {
-    let node = this.traverse(str);
-    if (node) {
-      return node.isWord;
-    }
-    return false;
+  // 查找
+  find(val) {
+
   }
 
-  delete(str) {
-    let node = this.traverse(str);
-    let cur = this.root;
-    if (!node) return;
+  // 遍历二叉树
+  // 前序遍历 (其实就是DFS) 先访问根节点、遍历左子树、最后右子树
 
-    for (const c of str) {
-      if (--cur.children[c].path == 0) {
-        cur = cur.children[c];
-        cur.children = Object.create(null);
-        return
+
+
+  // 中序遍历 (中序遍历是先遍历左子树，然后访问根节点，然后遍历右子树。)
+  inOrder(node) {
+    let stack = [];
+
+    // 中序遍历递归写法
+    function pushNode(node) {
+      if (node !== null) {
+        if (node.left !== null) {
+          pushNode(node.left)
+        }
+        stack.push(node.value);
+        if (node.right !== null) {
+          pushNode(node.right);
+        }
       }
-      cur = cur.children[c];
     }
-    cur.endCount--;
-  }
 
-  startsWith(str) {
+    // 中序遍历迭代 使用栈
+    function pushNodeStack(node) {
+      let middleStack = [];
+      let current = node;
+      let parent = null;
 
+      while (current !== null || middleStack.length > 0) {
+        if (current != null) {
+          middleStack.push(current);
+          current = current.left;
+        } else {
+          current = middleStack.pop();
+          stack.push(current.value);
+          current = current.right;
+        }
+      }      
+      console.log(stack);
+    }
+    pushNodeStack(node);
+    // console.log(stack);
+    return stack;
   }
 }
+const t1 = new BST();
 
-let tree = new TrieNode();
-tree.insert('cook');
-tree.insert('com');
-tree.insert('coo');
-tree.insert('cookies');
+t1.insert(9);
+t1.insert(7);
+t1.insert(8);
+t1.insert(5);
+t1.insert(87);
+t1.insert(23);
+t1.insert(12);
+t1.insert(19);
 
-tree.delete('cookies');
-tree.insert('cooki');
+console.log(t1);
 
-tree.delete('cooki');
-
-console.log(JSON.stringify(tree, null, 2));
-
-
-
-/**
- * 并查集
- */
-
-
-
-
-
-
-
-
-
-
+t1.inOrder(t1.root);

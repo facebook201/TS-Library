@@ -1,9 +1,5 @@
 
 
-
-
-
-
 /**
  * 前缀树 (Trie)
  * 
@@ -95,19 +91,5 @@ tree.insert('cooki');
 tree.delete('cooki');
 
 console.log(JSON.stringify(tree, null, 2));
-
-
-
-/**
- * 并查集
- */
-
-
-
-
-
-
-
-
 
 

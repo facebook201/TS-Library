@@ -92,18 +92,11 @@ class BST {
 
   // 查找
   find(val) {
-
   }
-
-  // 遍历二叉树
-  // 前序遍历 (其实就是DFS) 先访问根节点、遍历左子树、最后右子树
-
-
 
   // 中序遍历 (中序遍历是先遍历左子树，然后访问根节点，然后遍历右子树。)
   inOrder(node) {
     let stack = [];
-
     // 中序遍历递归写法
     function pushNode(node) {
       if (node !== null) {
@@ -116,7 +109,6 @@ class BST {
         }
       }
     }
-
     // 中序遍历迭代 使用栈
     function pushNodeStack(node) {
       let middleStack = [];
@@ -133,11 +125,133 @@ class BST {
           current = current.right;
         }
       }      
-      console.log(stack);
     }
-    pushNodeStack(node);
-    // console.log(stack);
     return stack;
+  }
+
+  // 前序遍历 先根 在左 右 先访问根节点、遍历左子树、最后右子树
+  preOrder() {
+    let stack = [];
+    function pushNode(root) {
+      if (root) {
+        stack.push(root.value);
+        if (root.left) {
+          pushNode(root.left);
+        }
+        if (root.right) {
+          pushNode(root.right);
+        }
+      }
+    }
+    pushNode2(this.root);
+
+    function pushNode2(root) {
+      let middle = [];
+      let p = root;
+
+      while (middle.length > 0 || p) {
+        if (p) {
+          // 先入根节点
+          stack.push(p.value);
+          middle.push(p);
+          p = p.left;
+        } else {
+          p = middle.pop();
+          p = p.right;
+        }
+      }
+    }
+  }
+
+  // 后序遍历 先左 再右 最后根
+  // [5, 8, 7, 19, 12, 23, 87, 9]
+  postOrder() {
+    let stack = [];
+    // 递归
+    function pushNode(root) {
+      if (root !== null) {
+        if (root.left !== null) {
+          pushNode(root.left);
+        }
+        if (root.right !== null) {
+          pushNode(root.right);
+        }
+        stack.push(root.value);
+      }
+    }
+
+    function pushNode2(root) {
+      let middle = [];
+      let current = root;
+      let prev = null;
+
+      while (current || middle.length > 0) {
+        if (current) {
+          middle.push(current);
+          current = current.left;
+        } else {
+          current = middle.pop();
+          // 没有右子树 或者刚访问过
+          if (!current.right || current.right === prev) {
+            stack.push(current.value);
+            prev = current;
+            current = null;
+          } else {
+            middle.push(current);
+            middle.push(current.right);
+            current = current.right.left;
+          }
+        }
+      }
+    }
+    pushNode2(this.root)
+    return stack;
+  }
+
+  // 层序遍历二叉树 
+  // BFS 队列实现 广度优先
+  // [9, 7, 87, 5, 8, 23, 12, 19]
+  levelOrder() {
+    let stack = [];
+
+    function pushNode(root) {
+      let middle = [];
+      middle.push(root);
+      while (middle.length > 0) {
+        let node = middle.shift();
+        stack.push(node.value);
+        if (node.left) {
+          middle.push(node.left);
+        }
+        if (node.right) {
+          middle.push(node.right)
+        }
+      }
+      console.log(stack)
+    }
+    pushNode(this.root);
+  }
+
+  // DFS 深度优先
+  deepOrder() {
+    let stack = [];
+
+    function pushNode(root) {
+      let middle = [];
+      middle.push(root);
+
+      while (middle.length > 0) {
+        let node = middle.pop();
+        stack.push(node.value);
+        if (node.right) {
+          middle.push(node.right);
+        }
+        if (node.left) {
+          middle.push(node.left)
+        }
+      }
+    }
+    pushNode(this.root);
   }
 }
 const t1 = new BST();
@@ -152,5 +266,6 @@ t1.insert(12);
 t1.insert(19);
 
 console.log(t1);
+// t1.inOrder(t1.root);
+t1.deepOrder();
 
-t1.inOrder(t1.root);

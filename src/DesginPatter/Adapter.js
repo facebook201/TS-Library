@@ -1,42 +1,44 @@
 /**
- * 适配器主要是给不匹配的对象创建一个特殊的对象，它能够转换对象接口
- * 使得能与其他对象进行交互。
- *
- * 试用场景 
- * 当你希望使用某个类， 但是其接口与其他代码不兼容时， 可以使用适配器类。
- * 比如 港版的充电头
- * 比如 jquery的 Each方法
+ * 适配器主要是使得不兼容的对象能够相互合作
+ * 例如iPhone的插头港版的 大陆就不能充电，需要一个转换接头来适配
+ * 
+ * 三个对象
+ * 使用者（Client）比如大陆要使用的插头
+ * 适配器（Adapter）适配器 把Adaptee适配成 Target 目标。
+ * 被适配者（Adaptee）被适配器
  */
 
 
-const arr = [
-  { name: '张三', address: '西湖区', id: '987hjsa3' },
-  { name: '李四', address: '余杭区', id: 'r87hjsa3' },
-  { name: '王五', address: '上海区', id: '987hj3a3' },
-  { name: '赵六', address: '东京区', id: '98shjsa3' },
-];
-
-var obj = { name: '赵六', address: '东京区', id: '98shjsa3' };
-
-$each(obj, function(i, v, obj) {
-  console.log(i, v, obj);
-});
-
-function $each(obj, fn) {
-  if (Array.isArray(obj)) {
-    for (let i = 0; i < obj.length; i++) {
-      fn.call(i, obj[i], obj);
-    }
-  } else {
-    let keys = Object.keys(obj);
-    if (keys.length > 0) {
-      for (let i = 0; i < keys.length; i++) {
-        let key = keys[i]
-        fn.call(key, obj[key], obj);
-      }
-    }
+class Target {
+  request() {
+    return 'Target: The Default target behavior！';
   }
-};
+}
 
+class Adaptee {
+  specificRequest() {
+    return '要适配的对象';
+  }
+}
 
+class Adapter extends Target {
+  _adaptee = null;
+
+  constructor(adaptee) {
+    super();
+    this._adaptee = adaptee;
+  }
+
+  request() {
+    const result = this.adaptee.specificRequest();
+    // 处理result 然后返回这个结果出去 在Adapter 里面来转换
+  }
+}
+
+function clientCode(target) {
+  console.log(target.request());
+}
+
+const adaptee = new Adaptee();
+const adapter = new Adapter(adaptee);
 

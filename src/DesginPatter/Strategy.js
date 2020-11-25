@@ -128,8 +128,6 @@ function validatorFunc() {
   //     errorMsg: '手机号码长度不能小于11'
   //   }
   // ]);
-
-
   // 添加规则完毕 开始遍历校验规则
   let errorMsg = validator.start();
   return errorMsg;

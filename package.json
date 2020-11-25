@@ -5,7 +5,8 @@
   "main": "./src/index.ts",
   "scripts": {
     "start": "webpack-dev-server --mode=development --config ./build/webpack.config.js",
-    "dev": "nodemon ./demo.js -i ./src/promise/"
+    "dev": "nodemon ./demo.js -i ./src/promise/",
+    "common": "webpack --devtool none --mode=development --target node commonjs/index.js"
   },
   "author": "shiyao",
   "license": "ISC",

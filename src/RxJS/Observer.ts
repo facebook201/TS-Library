@@ -26,8 +26,8 @@ function pipeFormArray<T, R>(
     return fns[0];
   }
 
-  return (input: T): R => {
-    return fns.reduce((prev: any, fn: UnaryFunction<T, R>) => fn(prev), input);
+  return (input: T): any => {
+    // return fns.reduce((prev: any, fn: UnaryFunction<T, R>) => fn(prev), input);
   };
 }
 

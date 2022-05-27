@@ -33,7 +33,7 @@ class Mediator {
 
 // 组件接口
 class Component {
-  protected mediator;
+  mediator;
 
   constructor(mediator = null) {
     this.mediator = mediator;

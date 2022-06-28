@@ -8,12 +8,9 @@
  * 
  * * 一个请求指的是来自客户端的一个操作，比如菜单按钮点击。重点在点击后并不直接实现，而是将请求封装为一个对象
  */
-
-
 interface Command {
   execute(): void;
 }
-
 
 class SimpleCommand implements Command {
   private payload: string;
@@ -37,15 +34,12 @@ class Receiver {
   }
 }
 
-
 class ComplexCommand implements Command {
   private receiver: Receiver;
-
 
   private a: string;
 
   private b: string;
-
 
   constructor(receiver: Receiver, a: string, b: string) {
     this.receiver = receiver;
@@ -59,10 +53,6 @@ class ComplexCommand implements Command {
     this.receiver.doSomethingElse(this.b);
   }
 }
-
-
-
-
 /**
  * The Invoker is associated with one or several commands. It sends a request to
  * the command.
@@ -117,4 +107,3 @@ const receiver = new Receiver();
 invoker.setOnFinish(new ComplexCommand(receiver, 'Send email', 'Save report'));
 
 invoker.doSomethingImportant();
-

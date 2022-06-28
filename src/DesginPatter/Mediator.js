@@ -8,8 +8,6 @@
  * 
  * 中介者模式跟观察者模式有点像，不过中介者模式是同级别的对象交互。
  */
-
-
 class Mediator {
   _component = null;
   _component2 = null;

@@ -30,8 +30,15 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'awesome-typescript-loader',
+            options: {
+              transpileOnly: true,
+            }
+          }
+        ],
         exclude: /node_modules/,
-        loader: ['awesome-typescript-loader']
       },
       {
         test: /\.jsx?$/,

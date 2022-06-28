@@ -1,17 +1,54 @@
-import * as React from 'react'; 
-import * as ReactDOM from 'react-dom';
-// import Slider from './components/slider';
+import React, { useState } from 'react'; 
+import ReactDOM from 'react-dom';
 
-const pathToRegexp = require("path-to-regexp");
-let re: any = pathToRegexp('/foo/:bar');
-console.log(re);
+let i = 0;
+
+function AddCount() {
+  const [list, setList] = useState<number[]>([]);
+
+  function add() {
+    setList(list.concat(i++));
+  };
+  return (
+    <div>
+      <button onClick={add}>Add</button>
+      {
+        list.map(v => <button onClick={add} key={v}>{v}</button>)
+      }
+    </div>
+  );
+}
+
+// function AddCount() {
+//   const [list, setList] = useState<React.ReactElement[]>([]);
+
+//   const add = () => {
+//     setList(
+//       list.concat(
+//         <button
+//           key={i}
+//           onClick={add}>
+//           {i++}
+//         </button>
+//       )
+//     )
+//   };
+
+//   return (
+//     <div>
+//       <button onClick={add}>
+//         Add
+//       </button>
+//       { list.map(v => v) }
+//     </div>
+//   );
+// }
 
 const App = () => {
   return (
     <div className="app">
       <section>
-        <h1>Slider 轮播图</h1>
-        {/* <Slider /> */}
+        <AddCount />
       </section>
     </div>
   );

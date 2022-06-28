@@ -41,7 +41,6 @@ function Validator() {
   this.cache = [];
 }
 
-
 function backKeys(obj) {
   let keys = Object.keys(obj);
   let i = 0;
@@ -132,7 +131,6 @@ function validatorFunc() {
   let errorMsg = validator.start();
   return errorMsg;
 }
-
 
 const registerForm = {};
 

@@ -1,9 +1,4 @@
 
-
-
-
-
-
 /**
  * * state 是存放在被 render的组件外面，这个 state 不会和其他组件共享。同时 这个组件后续render 你能够通过特定的作用域方式 访问到这个 state。
  */
@@ -33,16 +28,4 @@ export function useState<StateValue>(initVal: StateValue) {
   cursor++;
   return [value, setter];
 }
-
-
-
-
-
-
-
-
-
-
-
-
 

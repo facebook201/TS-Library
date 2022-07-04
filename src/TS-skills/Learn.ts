@@ -47,16 +47,9 @@ type RequireType<T> = {
 
 
 
+type GetFirstParamType<T> = T extends (...args: infer R) => any ? R[0] : never;
 
 
-
-
-
-
-
-
-
-
-
+type b = GetFirstParamType<(args: [1, 'sad']) => {}>;
 
 

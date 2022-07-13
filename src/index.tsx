@@ -1,59 +1,28 @@
-import React, { useEffect, useState } from 'react'; 
+import React from 'react'; 
 import ReactDOM from 'react-dom';
 
+import { useForm, SubmitHandler } from "react-hook-form";
 
-
-
-function AppNM() {
-  const [counter, setCounter] = useState(0);
-
-  useEffect(() => {
-    window.addEventListener('mousemove', () => {
-      console.log(counter);
-    })
-  }, []);
-
-  function handleClick() {
-    setCounter(counter + 1);
-  }
-
-  return (
-    <div onClick={handleClick}>
-      click to add Counter
-    </div>
-  );
+interface IFormInputs {
+  firstName: string
+  lastName: string
 }
 
+const onSubmit: SubmitHandler<IFormInputs> = data => console.log(data);
 
-let i = 0;
-
-function AddCount() {
-  const [list, setList] = useState<React.ReactElement[]>([]);
-
-  function add() {
-    setList(list.concat(<button onClick={add} key={i}>{i++}</button>));
-  };
+export default function App() {
+  const { register, formState: { errors }, handleSubmit } = useForm<IFormInputs>();
+  
   return (
-    <div>
-      <button onClick={add}>Add</button>
-      {
-        list.map(v => v)
-      }
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register("firstName", { required: true })} />
+      {errors.firstName && "First name is required"}
+      <input {...register("lastName", { required: true })} />
+      {errors.lastName && "Last name is required"}
+      <input type="submit" />
+    </form>
   );
 }
-
-
-
-const App = () => {
-  return (
-    <div className="app">
-      <section>
-        <AddCount />
-      </section>
-    </div>
-  );
-};
 
 ReactDOM.render(
   <App />,

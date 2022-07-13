@@ -16,14 +16,10 @@ function getPropertyNew<T extends object,
   return obj[key];
 }
 
-
 getPropertyNew({
   name: 'zhangsan',
   age: 12,
 }, 'name');
-
-
-
 
 /**
  * * 映射类型 Mapped

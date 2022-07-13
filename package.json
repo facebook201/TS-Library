@@ -35,6 +35,8 @@
     "postcss-url": "^8.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^7.33.1",
+    "react-query": "^3.39.1",
     "style-loader": "^1.2.1"
   }
 }

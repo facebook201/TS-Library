@@ -1,26 +1,64 @@
 import React from 'react'; 
 import ReactDOM from 'react-dom';
 
-import { useForm, SubmitHandler } from "react-hook-form";
+import { Observable } from 'rxjs';
 
-interface IFormInputs {
-  firstName: string
-  lastName: string
-}
+const stream$ = new Observable(subscriber => {
+  setTimeout(() => {
+    subscriber.next([1, 2, 3]);
+  }, 500);
 
-const onSubmit: SubmitHandler<IFormInputs> = data => console.log(data);
+  setTimeout(() => {
+    subscriber.next({ a: 1000 });
+  }, 1000);
+
+  setTimeout(() => {
+    subscriber.next('end');
+  }, 3000);
+
+  setTimeout(() => {
+    subscriber.complete();
+  }, 4000);
+});
+
+// 启动流
+const subscription = stream$.subscribe({
+  complete: () => console.log('done'),
+  next: v => console.log(v),
+  error: () => console.log('error')
+});
+
+
+const ThemeContext = React.createContext("light");
+
 
 export default function App() {
-  const { register, formState: { errors }, handleSubmit } = useForm<IFormInputs>();
-  
+  const [theme, setTheme] = React.useState({ theme: 'light' });
+
+  const toggleTheme = () => {
+    const themeVal = theme.theme === 'light' ? 'dark' : 'light';
+    setTheme({ theme: themeVal });
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("firstName", { required: true })} />
-      {errors.firstName && "First name is required"}
-      <input {...register("lastName", { required: true })} />
-      {errors.lastName && "Last name is required"}
-      <input type="submit" />
-    </form>
+    <div>
+      <h1 onClick={toggleTheme}>
+        I ❤️ U
+      </h1>
+      <ThemeContext.Provider value={theme.theme}>
+        <AppBody />
+      </ThemeContext.Provider>
+    </div>
+  );
+}
+
+function AppBody() {
+  const theme = React.useContext(ThemeContext);
+
+  return (
+    <div>
+      {theme}
+    </div>
   );
 }
 

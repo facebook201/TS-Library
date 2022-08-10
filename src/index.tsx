@@ -1,36 +1,10 @@
 import React from 'react'; 
 import ReactDOM from 'react-dom';
+import CountTime from './Rxjs/CountTime';
 
-import { Observable } from 'rxjs';
-
-const stream$ = new Observable(subscriber => {
-  setTimeout(() => {
-    subscriber.next([1, 2, 3]);
-  }, 500);
-
-  setTimeout(() => {
-    subscriber.next({ a: 1000 });
-  }, 1000);
-
-  setTimeout(() => {
-    subscriber.next('end');
-  }, 3000);
-
-  setTimeout(() => {
-    subscriber.complete();
-  }, 4000);
-});
-
-// 启动流
-const subscription = stream$.subscribe({
-  complete: () => console.log('done'),
-  next: v => console.log(v),
-  error: () => console.log('error')
-});
-
+import 'antd/dist/antd.css';
 
 const ThemeContext = React.createContext("light");
-
 
 export default function App() {
   const [theme, setTheme] = React.useState({ theme: 'light' });
@@ -43,15 +17,15 @@ export default function App() {
   return (
     <div>
       <h1 onClick={toggleTheme}>
-        I ❤️ U
+        I ❤️ U 
       </h1>
+      <CountTime />
       <ThemeContext.Provider value={theme.theme}>
         <AppBody />
       </ThemeContext.Provider>
     </div>
   );
 }
-
 function AppBody() {
   const theme = React.useContext(ThemeContext);
 

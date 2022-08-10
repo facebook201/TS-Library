@@ -1,42 +1,31 @@
 import React from 'react'; 
 import ReactDOM from 'react-dom';
-import CountTime from './Rxjs/CountTime';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
-import 'antd/dist/antd.css';
-
-const ThemeContext = React.createContext("light");
-
-export default function App() {
-  const [theme, setTheme] = React.useState({ theme: 'light' });
-
-  const toggleTheme = () => {
-    const themeVal = theme.theme === 'light' ? 'dark' : 'light';
-    setTheme({ theme: themeVal });
-  };
-
-  return (
-    <div>
-      <h1 onClick={toggleTheme}>
-        I ❤️ U 
-      </h1>
-      <CountTime />
-      <ThemeContext.Provider value={theme.theme}>
-        <AppBody />
-      </ThemeContext.Provider>
-    </div>
-  );
+function Invoices() {
+  return <div>Invoices</div>
 }
-function AppBody() {
-  const theme = React.useContext(ThemeContext);
 
+function Expenses() {
+  return <div>Expenses</div>
+}
+
+function App() {
   return (
     <div>
-      {theme}
+      App
     </div>
   );
 }
 
 ReactDOM.render(
-  <App />,
+  <BrowserRouter>
+    {/* 侧边栏导航 */}
+    <Route path="/" component={App} />
+    <Switch>
+      <Route path="/invoices" component={Invoices} />
+      <Route path="/expenses" component={Invoices} />
+    </Switch>
+  </BrowserRouter>,
   document.getElementById('app')
 );

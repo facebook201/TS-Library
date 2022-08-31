@@ -1,6 +1,8 @@
-import React from 'react'; 
+import React, { useContext } from 'react'; 
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+
+import ParentWard from './ForWard';
 
 function Invoices() {
   return <div>Invoices</div>
@@ -24,7 +26,7 @@ ReactDOM.render(
     <Route path="/" component={App} />
     <Switch>
       <Route path="/invoices" component={Invoices} />
-      <Route path="/expenses" component={Invoices} />
+      <Route path="/expenses" component={ParentWard} />
     </Switch>
   </BrowserRouter>,
   document.getElementById('app')

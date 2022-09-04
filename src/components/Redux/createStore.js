@@ -1,10 +1,8 @@
 
 
-
-
-
-
-
+// import { Action } from './types/actions'
+import ActionTypes from './utils/actionTypes';
+import $$observable from './utils/symbol-observable';
 
 // 创建一个 store Tree
 export default function createStore(reducer, preloadedState, enhancer) {
@@ -31,6 +29,12 @@ export default function createStore(reducer, preloadedState, enhancer) {
 
 
   function getState() {
+    if (isDispatching) {
+      throw new Error(`
+        reducer 正在执行！！！
+      `);
+    }
+
     return currentState;
   }
 
@@ -57,7 +61,6 @@ export default function createStore(reducer, preloadedState, enhancer) {
 
 
   function dispatch(action) {
-
     try {
       isDispatching = true;
       currentState = currentReducer(currentState, action);
@@ -73,6 +76,46 @@ export default function createStore(reducer, preloadedState, enhancer) {
 
     return action;
   }
+
+
+  function observable() {
+    const outerSubscribe = subscribe;
+
+    return {
+      subscribe(observer) {
+        if (typeof observer !== 'object' || observer === null) {
+          Error();
+        }
+
+        function observeState() {
+          const observerAsObserver = observer;
+          if (observerAsObserver.next) {
+            observerAsObserver.next(getState());
+          }
+        }
+        
+        observeState();
+        const unsubscribe = outerSubscribe(observeState);
+
+        return { unsubscribe };
+      },
+
+      [$$observable]() {
+        return this;
+      }
+    }
+  }
+
+  dispatch({ type: ActionTypes.INIT });
+
+  const store = {
+    dispatch,
+    subscribe,
+    getState,
+    [$$observable]: observable
+  };
+
+  return store;
 }
 
 

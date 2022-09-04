@@ -1,3 +1,4 @@
+import { BrowserRouter } from 'react-router-dom';
 
 
 export enum Action {
@@ -83,6 +84,57 @@ export interface History {
 }
 
 
+// BrowserRouter
+
+export interface BrowserHistory extends History { }
+
+export interface HashHistory extends History { }
+
+const readOnly: <T>(obj: T) => Readonly<T> = true
+  ? (obj) => Object.freeze(obj)
+  : (obj) => obj;
+
+type HistoryState = {
+  usr: any;
+  key?: string;
+  idx: number;
+};
+
+const BeforeUnloadEventType = "beforeunload";
+const HashChangeEventType = "hashchange";
+const PopStateEventType = "popstate";
+
+export type BrowserHistoryOptions = { window?: Window };
+
+
+// Browser History 依赖 服务端配置 URLS
+export function createBrowserHistory(
+  options: BrowserHistoryOptions = {}
+): BrowserHistory {
+
+  let { window = document.defaultView! } = options;
+  let globalHistory = window.history;
+
+
+  function getIndexAndLocation(): [number, Location] {
+    let { pathname, search, hash } = window.location;
+
+    let state = globalHistory.state || {};
+
+    return [
+      state.idx,
+      readOnly<Location>({
+        pathname,
+        search,
+        hash,
+        state: state.usr || null,
+        key: state.key || "default",
+      }),
+    ];
+  }
+
+  
+}
 
 
 

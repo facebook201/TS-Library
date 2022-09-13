@@ -76,8 +76,6 @@ export {
 //  可以手动当做store.dispatch使用。这也是为什么要科里化的原因。
 
 
-
-
 /**
  * 1、reducer 管理整个业务里的数据 包括处理数据，存储数据
  * 2、reducer 返回的必须是一个函数，这个函数里接收两个参数 一个是 state，另一个是 action
@@ -86,4 +84,12 @@ export {
  *  会执行这两行代码
  *  isDispatching = true;
  *  currentState = currentReducer(currentState, action);
+ */
+
+
+/**
+ * todo Redux 可以只通过 dispatch、来更新状态。但是如果层级太多 每一级都需要手动传 很麻烦。
+ * 
+ * 
+ * 所以 Provider 可以将 store 全局注入组件树。
  */

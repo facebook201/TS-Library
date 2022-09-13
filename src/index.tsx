@@ -1,33 +1,34 @@
 import React, { useContext } from 'react'; 
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+// import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
-import ParentWard from './ForWard';
 
-function Invoices() {
-  return <div>Invoices</div>
-}
 
-function Expenses() {
-  return <div>Expenses</div>
+const TestContext = React.createContext({ light: '' });
+
+function ChildText() {
+  const value = useContext(TestContext);
+
+  console.log(value);
+
+  return (
+    <div>
+      { value.light }
+    </div>
+  )
 }
 
 function App() {
   return (
     <div>
-      App
+      <ChildText />
     </div>
   );
 }
 
 ReactDOM.render(
-  <BrowserRouter>
-    {/* 侧边栏导航 */}
-    <Route path="/" component={App} />
-    <Switch>
-      <Route path="/invoices" component={Invoices} />
-      <Route path="/expenses" component={ParentWard} />
-    </Switch>
-  </BrowserRouter>,
+  <TestContext.Provider value={{ light: 'black' }}>
+    <App />
+  </TestContext.Provider>,
   document.getElementById('app')
 );

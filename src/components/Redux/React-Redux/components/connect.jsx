@@ -1,9 +1,6 @@
 
 import React, { useContext, useMemo, useRef } from 'react';
 
-
-
-
 function connect(
   mapStateToProps, // 一个函数从 state 中取值
   mapDispatchToProps, // 设置 dispatch action 动作
@@ -21,19 +18,12 @@ function connect(
   const shouldHandleStateChanges = Boolean(mapStateToProps);
 
 
-
-
-
   const wrapWithConnect = (WrappedComponent) => {
     const wrappedComponentName =
       WrappedComponent.displayName || WrappedComponent.name || 'Component'
 
     const displayName = `Connect(${wrappedComponentName})`
-
-    
   };
-
-
 
 
 }

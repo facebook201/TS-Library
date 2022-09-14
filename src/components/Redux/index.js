@@ -87,3 +87,10 @@ export {
  *  isDispatching = true;
  *  currentState = currentReducer(currentState, action);
  */
+
+
+/**
+ * Redux 可以完成保存状态 传递状态，更新状态。但是层数太多的话，每一层都需要传递。所以 Proider 可以全局注入。
+ * 
+ * 
+ */

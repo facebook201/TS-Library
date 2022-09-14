@@ -12,6 +12,10 @@ function Expenses() {
   return <div>Expenses</div>
 }
 
+const SYContext = React.createContext({ light: 'black' });
+
+SYContext.displayName = 'sy-context';
+
 function App() {
   return (
     <div>
@@ -21,13 +25,16 @@ function App() {
 }
 
 ReactDOM.render(
-  <BrowserRouter>
-    {/* 侧边栏导航 */}
-    <Route path="/" component={App} />
-    <Switch>
-      <Route path="/invoices" component={Invoices} />
-      <Route path="/expenses" component={ParentWard} />
-    </Switch>
-  </BrowserRouter>,
+  // <BrowserRouter>
+  //   {/* 侧边栏导航 */}
+  //   <Route path="/" component={App} />
+  //   <Switch>
+  //     <Route path="/invoices" component={Invoices} />
+  //     <Route path="/expenses" component={ParentWard} />
+  //   </Switch>
+  // </BrowserRouter>,
+  <SYContext.Provider value={{ light: 'blue'}}>
+    <App />
+  </SYContext.Provider>,
   document.getElementById('app')
 );

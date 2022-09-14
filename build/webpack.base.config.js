@@ -7,12 +7,12 @@ function resolve(dir) {
 }
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: './src/index.jsx',
   output: {
     filename: 'app.js'
   },
   resolve: {
-    extensions: ['.json', '.js', '.ts', '.tsx'],
+    extensions: ['.json', '.js', 'jsx'],
     alias: {
       '@': resolve('src'),
     }
@@ -27,18 +27,6 @@ module.exports = {
           'postcss-loader',
           'less-loader'
         ]
-      },
-      {
-        test: /\.tsx?$/,
-        use: [
-          {
-            loader: 'awesome-typescript-loader',
-            options: {
-              transpileOnly: true,
-            }
-          }
-        ],
-        exclude: /node_modules/,
       },
       {
         test: /\.jsx?$/,

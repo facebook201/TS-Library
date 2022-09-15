@@ -16,22 +16,20 @@ const sub = (number) => ({
 
 function Count(props) {
   const { dispatch, count } = props;
-  const [number] = useState(count);
-
-  console.log(props)
-
+  
   const ADD = () => {
-    dispatch(add(number + 1));
+    debugger;
+    dispatch(add(count + 1));
   }
 
   const SUB = () => {
-    dispatch(sub(number - 1));
+    dispatch(sub(count - 1));
   }
 
   return (
     <div>
       <Button onClick={ADD}>++</Button>
-      {number}
+      {count}
       <Button onClick={SUB}>--</Button>
     </div>
   );
@@ -44,13 +42,13 @@ const mapStateProps = (state) => {
   }
 };
 
-Count = connect(mapStateProps)(Count);
+const WrappedCount = connect(mapStateProps)(Count);
 
 function App() {
   return (
     <div>
       App
-      <Count />
+      <WrappedCount />
     </div>
   );
 }

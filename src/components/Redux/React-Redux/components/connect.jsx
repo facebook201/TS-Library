@@ -1,8 +1,12 @@
 
+<<<<<<< HEAD
 import React, { useContext, useEffect, useMemo, useRef } from 'react';
 
 const EMPTY_ARRAY = [null, 0];
 const NO_SUBSCRIPTION_ARRAY = [null, null];
+=======
+import React, { useContext, useMemo, useRef } from 'react';
+>>>>>>> b4c16bce7a693c045ec8d35be1f1dbfb9223ae3d
 
 function connect(
   mapStateToProps, // 一个函数从 state 中取值
@@ -23,6 +27,7 @@ function connect(
 
   const wrapWithConnect = (WrappedComponent) => {
     const wrappedComponentName =
+<<<<<<< HEAD
       WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
     const displayName = `Connect(${wrappedComponentName})`;
@@ -227,6 +232,14 @@ function connect(
   }
   
   return wrapWithConnect;
+=======
+      WrappedComponent.displayName || WrappedComponent.name || 'Component'
+
+    const displayName = `Connect(${wrappedComponentName})`
+  };
+
+
+>>>>>>> b4c16bce7a693c045ec8d35be1f1dbfb9223ae3d
 }
 
 export default connect;

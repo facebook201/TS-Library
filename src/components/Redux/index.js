@@ -63,6 +63,25 @@ export {
  */
 
 
+/**
+ * 如果应用复杂之后 可以把 reducer 拆分成多少个独立的函数， combineReducers 把多个不同的 reducer 函数
+ * 合并成一个最终的 reducer 函数。
+ * 
+ * rootReducer = combineReducers({potato: potatoReducer, tomato: tomatoReducer})
+  // 这将返回如下的 state 对象
+  {
+    potato: {
+    // ... potatoes, 和一些其他由 potatoReducer 管理的 state 对象 ...
+    },
+    tomato: {
+    // ... tomatoes, 和一些其他由 tomatoReducer 管理的 state 对象，比如说 sauce 属性 ...
+    }
+  }
+*/
+
+
+
+
 //  connect是真正的重点，它是一个科里化函数，意思是先接受两个参数（数据绑定mapStateToProps和事件绑定
 //  mapDispatchToProps, 再接受一个参数（将要绑定的组件本身）
  
@@ -76,8 +95,6 @@ export {
 //  可以手动当做store.dispatch使用。这也是为什么要科里化的原因。
 
 
-
-
 /**
  * 1、reducer 管理整个业务里的数据 包括处理数据，存储数据
  * 2、reducer 返回的必须是一个函数，这个函数里接收两个参数 一个是 state，另一个是 action
@@ -88,9 +105,30 @@ export {
  *  currentState = currentReducer(currentState, action);
  */
 
+<<<<<<< HEAD
 
 /**
  * Redux 可以完成保存状态 传递状态，更新状态。但是层数太多的话，每一层都需要传递。所以 Proider 可以全局注入。
  * 
  * 
  */
+=======
+/**
+ * todo Provider connect 
+ * Redux 可以只通过 dispatch、来更新状态。但是如果层级太多 每一级都需要手动传 很麻烦。
+ * 所以 Provider 可以将 store 全局注入组件树。
+ */
+
+/**
+ * todo Middleware中间件
+ * * 业务开发中 需要打印 action 信息，需要在dispatch 或 reducer 有异步请求能力。
+ * * 需要一个可以 自由增减的 插件机制。Koa 中间价机制 可以使得前端应用中便捷地实现如日志打印、异步请求等功能。
+ */
+
+
+
+
+
+
+
+>>>>>>> b4c16bce7a693c045ec8d35be1f1dbfb9223ae3d

@@ -104,14 +104,6 @@ export {
  *  currentState = currentReducer(currentState, action);
  */
 
-<<<<<<< HEAD
-
-/**
- * Redux 可以完成保存状态 传递状态，更新状态。但是层数太多的话，每一层都需要传递。所以 Proider 可以全局注入。
- * 
- * 
- */
-=======
 /**
  * todo Provider connect 
  * Redux 可以只通过 dispatch、来更新状态。但是如果层级太多 每一级都需要手动传 很麻烦。
@@ -126,15 +118,30 @@ export {
  * 
  * * 中间件的格式
  * 
- * function middlewareFormat() {
+ * function middlewareFormat({ getState, ...props }) {
  *   return next => action => {
  *     console.log(); // 
  *   }
  * }
  * 
- * middleware(m1, m2, m3);
+ * middleware(m1, m2, m3); 
+ * 
+ * 1、 const chain = middlewares.map(middleware => middleware(middlewareAPI));
+ * * 第一步把 把需要的参数传到每个单独的中间件中 然后返回一个中间件链。
+ * 
+ * 2、dispatch = compose(...chain)(store.dispatch);
+ * * 组合中间件链 返回一个 科里化函数 f1(f2(f3(dispatch))) 把 每个中间件的动作返回给上一个中间件当参数 依次形成洋葱模型
+ * 
+ * 3、next 参数就是下一个中间件的 action => {} 动作
+ * 
+ * 最后redux 的disptach 就是 dispatch = action => {};
  * 
  * 
+ * 
+ * todo Redux-Thunk
+ * redux-thunk的整个流程来说，它是等异步任务执行完成之后，我们再去调用dispatch，然后去store去调用reducers
+ * 
+ * redux-saga的整个流程来说，它是等执行完action和reducer之后，判断reducer中有没有这个action
  */
 
 
@@ -143,4 +150,3 @@ export {
 
 
 
->>>>>>> b4c16bce7a693c045ec8d35be1f1dbfb9223ae3d

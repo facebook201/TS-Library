@@ -9,7 +9,7 @@
 import compose from './compose';
 
 export default function applyMiddleware(...middlewares) {
-  return (createState) => (reducer, preloadedState) => {
+  return (createStore) => (reducer, preloadedState) => {
     const store = createStore(reducer, preloadedState);
 
     let dispatch;

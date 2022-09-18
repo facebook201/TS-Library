@@ -54,7 +54,7 @@ export {
  * Action 被 dispatch(action) 触发, store 里的 Reducers 执行，处理数据 返回一个新的数据给store。
  * 当新的数据改变之后， React Component 就会渲染。
  * 
- * A）、 action 是声明式的数据几个欧 提供事件的所有要素 不提供逻辑
+ * A）、 action 是声明式的数据 提供事件的所有要素 不提供逻辑
  * 
  * B）、reducer 是一个匹配函数 action发送式全局的。所有的 reducer 都可以捕捉到与自己相关与否。
  *      命中就修改 store 状态。
@@ -78,7 +78,6 @@ export {
     }
   }
 */
-
 
 
 
@@ -123,6 +122,19 @@ export {
  * todo Middleware中间件
  * * 业务开发中 需要打印 action 信息，需要在dispatch 或 reducer 有异步请求能力。
  * * 需要一个可以 自由增减的 插件机制。Koa 中间价机制 可以使得前端应用中便捷地实现如日志打印、异步请求等功能。
+ * 
+ * 
+ * * 中间件的格式
+ * 
+ * function middlewareFormat() {
+ *   return next => action => {
+ *     console.log(); // 
+ *   }
+ * }
+ * 
+ * middleware(m1, m2, m3);
+ * 
+ * 
  */
 
 

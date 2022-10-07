@@ -49,6 +49,8 @@
     "react-hook-form": "^7.33.1",
     "react-query": "^3.39.1",
     "react-router-dom": "^5.1.2",
+    "react-virtualized": "^9.22.3",
+    "react-window": "^1.8.7",
     "rxjs": "^7.5.6",
     "style-loader": "^1.2.1"
   }

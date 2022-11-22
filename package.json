@@ -52,6 +52,7 @@
     "react-virtualized": "^9.22.3",
     "react-window": "^1.8.7",
     "rxjs": "^7.5.6",
+    "rxjs-hooks": "^0.8.0-alpha.0",
     "style-loader": "^1.2.1"
   }
 }

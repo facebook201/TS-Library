@@ -1,10 +1,24 @@
 import React from "react";
-import { useObservable } from "rxjs-hooks";
-import { interval } from "rxjs";
-import { map } from "rxjs/operators";
+import { Subject } from "rxjs";
+// import { useObservable } from "rxjs-hooks";
+// import { map } from "rxjs/operators";
+
+const sub = new Subject();
+
+sub.subscribe({
+  next: (v) => console.log('ObserverA: ' +  v)
+});
+
+sub.subscribe({
+  next: (v) => console.log('ObserverB: ' +  v)
+});
+
+sub.next(1);
+sub.next(3);
+
 
 export default function BigList() {
-  const value = useObservable(() => interval(500).pipe(map((val) => val * 3)));
+  // const value = useObservable(() => interval(500).pipe(map((val) => val * 3)));
 
   return (
     <div className="App">
@@ -12,3 +26,4 @@ export default function BigList() {
     </div>
   );
 }
+  

@@ -1,12 +1,41 @@
-import React, { useState } from 'react'; 
+import React from 'react'; 
 import ReactDOM from 'react-dom';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
+import { makeAutoObservable } from 'mobx';
+import { observer } from 'mobx-react';
 import { store } from './redux';
 import BigList from './BigList';
+import { Button } from 'antd';
 
+class Timer {
+  secondsPassed = 0;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  increase() {
+    this.secondsPassed += 1;
+  }
+
+  reset() {
+    this.secondsPassed = 0;
+  }
+}
+
+const myTimer = new Timer();
+
+
+const TimerView = observer(({ timer }) => (
+  <Button onClick={() => timer.reset()}>Seconds Passed: {timer.secondsPassed}</Button>
+));
+
+setInterval(() => {
+  myTimer.increase()
+}, 1000);
 
 function App() {
-  return <BigList />;
+  return <TimerView timer={myTimer} />;
 }
 
 ReactDOM.render(

@@ -2,6 +2,7 @@
 node_modules/
 tea-sell/node_modules/
 tea-sell/server/node_modules/
+nest-project/my-nest/node_modules
 /components
 npm-debug.log*
 yarn-debug.log*

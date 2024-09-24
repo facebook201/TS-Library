@@ -77,15 +77,6 @@ module.exports = {
     title: '前端WebGL',
     port: 8002,
     themeConfig: {
-        repoLabel: 'GitHub',        // nav: [
-        //     {
-        //         text: '图形学',
-        //         items: [
-        //             { text: 'webgl', link: '/articles/webgl/' },
-        //             { text: 'threejs', link: '/articles/threejs/' }
-        //         ],
-        //     },
-        // ],
         nav: [
             {
                 text: '图形学', link: '/articles/webgl/'
@@ -99,7 +90,4 @@ module.exports = {
         lastUpdated: 'Last Updated',
         smoothScroll: true
     },
-    // layouts: {
-    //     Layout: require.resolve('./components/BlogList.vue')
-    // }
 }

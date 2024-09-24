@@ -51,8 +51,6 @@ function createArticlesNavItem (fileMapObj) {
         navItem.push({ text, link });
     })
 
-    console.log(navItem)
-
     return navItem;
 }
 function createSideBar (fileMapObj) {
@@ -73,24 +71,35 @@ function createSideBar (fileMapObj) {
 }
 const getSidebarMapObject = createSidebarMapObject(pathName)
 const sidebar = createSideBar(getSidebarMapObject);
-
+const articlesNavItem = createArticlesNavItem(getSidebarMapObject)
 module.exports = {
     base: '/blog/',
-    title: '前端图形技术',
+    title: '前端WebGL',
     port: 8002,
     themeConfig: {
+        repoLabel: 'GitHub',        // nav: [
+        //     {
+        //         text: '图形学',
+        //         items: [
+        //             { text: 'webgl', link: '/articles/webgl/' },
+        //             { text: 'threejs', link: '/articles/threejs/' }
+        //         ],
+        //     },
+        // ],
         nav: [
             {
-                text: '图形学',
-                items: [
-                    { text: 'webgl', link: '/articles/webgl/' },
-                    { text: 'threeJS', link: '/articles/threejs/' }
-                ],
+                text: '图形学', link: '/articles/webgl/'
             },
+            {
+                text: 'threejs', link: '/articles/threejs/'
+            }
         ],
         sidebar,
         sidebarDepth: 3,
         lastUpdated: 'Last Updated',
         smoothScroll: true
     },
+    // layouts: {
+    //     Layout: require.resolve('./components/BlogList.vue')
+    // }
 }
